@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body style="padding-bottom: 200px;">
+<div class="demo1" v-bind:class="classObject"></div>
+
+<script>
+    var vm = new Vue({
+        el:".demo1",
+        data:{
+            classObject:{
+                active:true,
+                "text-danger":false
+            }
+        }
+    });
+</script>
+<hr>
+<div class="demo2"
+     v-bind:class="classObject"
+></div>
+<script>
+    var vm1 = new Vue({
+        el:".demo2",
+        data:{
+            isActive:true,
+            error:""
+        },
+        computed:{
+            classObject:function(){
+                return {
+                    active:this.isActive && !this.error,
+                    'text-danger':this.error && this.error.type === "fatal"
+                }
+            }
+        }
+    });
+</script>
+
+<hr>
+<div class="demo3" v-bind:style="styleObject">测试</div>
+<script>
+    var vm = new Vue({
+        el:".demo3",
+        data:{
+            styleObject:{
+                color:"red",
+                'font-size':"30px"
+            }
+        }
+    });
+</script>
+
+
+</body>
+</html>

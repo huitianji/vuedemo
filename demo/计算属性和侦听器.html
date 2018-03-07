@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body style="padding-bottom: 200px;">
+
+<h1>计算属性</h1>
+<div class="example1">
+    <span>----{{message}}</span>
+    <p>++++++{{reversedMessage}}</p>
+    <p>\\\{{now}}\\</p>
+</div>
+<script>
+    var vm1 = new Vue({
+        el:".example1",
+        data:{
+            message:"this is cold !"
+        },
+        computed:{
+            reversedMessage:function () {
+                return this.message.split("").reverse().join("");
+            },
+            now:function () {
+                return new Date().toLocaleString();
+            }
+        }
+    });
+</script>
+
+<hr>
+<div class="demo">
+    {{fullname}}
+</div>
+
+
+<script>
+    var vm2 = new Vue({
+        el:".demo",
+        data:{
+            firstname:"a",
+            lastname:"b"
+        },
+        computed:{
+            fullname: function () {
+                return this.firstname + " " + this.lastname;
+            }
+        }
+    });
+</script>
+
+<hr>
+<div class="demo2">
+    {{fullname}}
+</div>
+<script>
+    var vm3 = new Vue({
+        el:".demo2",
+        data:{
+            firstname:"a1",
+            lastname:"b1"
+        },
+        computed:{
+           fullname:{
+               get:function (){
+                   return this.firstname + " " + this.lastname;
+               },
+               set:function (newValue) {
+                    var names = newValue.split("");
+                    this.firstname = names[0];
+                   this.lastname = names[names.length -1]
+               }
+
+           }
+        }
+    });
+</script>
+
+
+
+</body>
+</html>
