@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body style="padding-bottom: 200px;">
+<h1>监听事件</h1>
+<div class="vm1">
+    <button v-on:click="counter += 1"> add !</button>
+    <p>
+        The button about has been clicks {{counter}} times
+    </p>
+</div>
+
+<script>
+    var vm1 = new Vue({
+        el:".vm1",
+        data:{
+            counter:0
+        }
+    });
+</script>
+<hr>
+<h1>
+    事件处理方法
+</h1>
+<div class="vm2">
+    <button v-on:click="greet">Greet</button>
+</div>
+<script>
+    var vm2 = new Vue({
+        el:".vm2",
+        data:{
+            name:"vue js"
+        },
+        methods:{
+            greet:function ( event ) {
+                alert( 'hello' + this.name + "!");
+                if ( event ) {
+                    alert(event.target.tagName);
+                }
+            }
+        }
+    });
+</script>
+
+<hr>
+
+
+<button class="vm3" v-on:click="warn('Form cannot be submitted yet', $event)">submit</button>
+<script>
+    var vm3 = new Vue({
+        el:".vm3",
+        methods:{
+            warn:function (message, event) {
+//                if ( event ) {
+//                    event.preventDefault();
+//                };
+                alert( message );
+            }
+        }
+    });
+</script>
+
+
+
+</body>
+</html>

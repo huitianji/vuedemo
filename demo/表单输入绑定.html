@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body style="padding-bottom: 200px;">
+<h1>
+    单个复选框，绑定到布尔值：
+</h1>
+<div class="vm1">
+    <input type="checkbox" id="checkbox" value="ooo"  v-model="checked">
+    <label for="checkbox">{{ checked }}</label>
+    <p>Checked names: {{ checked }}</p>
+</div>
+
+<script>
+    var vm1 = new Vue({
+        el:".vm1",
+        data:{
+            checked: false
+        }
+    });
+</script>
+<hr>
+<h1>
+    多个复选框，绑定到同一个数组：
+</h1>
+
+<div class="vm2">
+    <input type="checkbox" id="jack" value="Jack" v-model="checkedNames">
+    <label for="jack">Jack</label>
+    <input type="checkbox" id="john" value="John" v-model="checkedNames">
+    <label for="john">John</label>
+    <input type="checkbox" id="mike" value="Mike" v-model="checkedNames">
+    <label for="mike">Mike</label>
+    <br>
+    <span>Checked names: {{ checkedNames }}</span>
+</div>
+<script>
+    var vm2 = new Vue({
+        el:".vm2",
+        data:{
+            checkedNames:[]
+        }
+    });
+</script>
+
+<hr>
+<h1>单选按钮</h1>
+
+<div class="vm3">
+    <input type="radio" id="one" value="One" v-model="picked" checked="checked">
+    <label for="one">One</label>
+    <br>
+    <input type="radio" id="two" value="Two" v-model="picked">
+    <label for="two">Two</label>
+    <br>
+    <span>Picked: {{ picked }}</span>
+</div>
+<script>
+    var vm3 = new Vue({
+        el:".vm3",
+        data:{
+            picked:"",
+            ok:"checked"
+        },
+        methods:{
+            defaultChecked:function () {
+                console.log(1)
+            }
+        }
+    });
+</script>
+<input type="radio" checked>
+<h1>select-下拉框</h1>
+<div class="vm4">
+    <select v-model="selected">
+        <option disabled value="">请选择</option>
+        <option>A</option>
+        <option>B</option>
+        <option>C</option>
+    </select>
+    <span>Selected: {{ selected }}</span>
+</div>
+<script>
+    var vm4 = new Vue({
+        el:".vm4",
+        data:{
+            selected:""
+        }
+    });
+</script>
+
+<h5>多选</h5>
+
+<div class="vm5">
+    <select v-model="selected" multiple style="width: 50px;">
+        <option>A</option>
+        <option>B</option>
+        <option>C</option>
+    </select>
+    <br>
+    <span>Selected: {{ selected }}</span>
+</div>
+<script>
+    var vm5 = new Vue({
+        el:".vm5",
+        data:{
+            selected:[]
+        }
+    });
+</script>
+
+<h1>用 v-for 渲染的动态选项：</h1>
+<div class="vm6">
+    <select v-model="selected">
+        <option
+                v-for="option in options"
+                v-bind:value="option.value"
+        >
+            {{option.text}}
+        </option>
+    </select>
+    <span>selected:{{selected}}</span>
+</div>
+<script>
+    var vm6 = new Vue({
+        el:".vm6",
+        data:{
+            options:[
+                {text:"a",value:"01"},
+                {text:"b",value:"02"},
+                {text:"c",value:"03"}
+            ],
+            selected:"01"
+        }
+    });
+</script>
+<h1>值绑定</h1>
+<input class="vm7" type="radio" v-model="picked" value="a">
+<script>
+    var vm7 = new Vue({
+        el:".vm7",
+        data:{
+            picked:""
+        }
+    });
+</script>
+
+<hr>
+
+<input class="vm8" type="radio" v-model="pick" v-bind:value="a">cs
+<script>
+    var vm8 = new Vue({
+        el:".vm8",
+        data:{
+            pick:"",
+            a:true
+        }
+    });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
