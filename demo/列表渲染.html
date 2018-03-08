@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body style="padding-bottom: 200px;">
+<h1>v-for =>(item, index)</h1>
+<ul class="vm1">
+    <li v-for="(item, index) in items" v-bind:key="item.id">
+        {{parentMessage}} -- {{index}} -- {{item.message}}
+    </li>
+</ul>
+<script>
+    var vm1 = new Vue({
+        el:".vm1",
+        data:{
+            parentMessage:"fathoer/mothor",
+            items:[
+                {message:"ce1"},
+                {message:"ce2"},
+                {message:"ce3"}
+            ]
+        }
+    });
+</script>
+<hr>
+<h1>v-for = > v-bind:key</h1>
+<ul class="vm2">
+    <li v-for="item in items" v-bind:key="item.id">
+        {{item.message}}
+    </li>
+</ul>
+<script>
+    var vm2 = new Vue({
+        el:".vm2",
+        data:{
+            items:[
+                {id:0,message:"ww"},
+                {id:1,message:"ww1"},
+                {id:2,message:"ww2"}
+            ]
+        }
+    });
+</script>
+
+
+<hr>
+<script>
+    var arr = ["a","b"];
+    arr.filter(function (item) {
+        return item;
+    });
+</script>
+
+<hr>
+
+<h1>对象更改检测注意事项</h1>
+<h5>Vue.set  |  Object.assign</h5>
+<div class="vm3">
+    <ul>
+        <li v-for="item in userProfile">
+            {{item}}
+        </li>
+    </ul>
+</div>
+<script>
+
+    var vm3 = new Vue({
+        el:".vm3",
+        data: {
+            userProfile: {
+                name: 'Anika1'
+            }
+        }
+    });
+    Vue.set(vm3.userProfile,"age","27");
+
+    vm3.userProfile = Object.assign({}, vm3.userProfile, {
+        age:"30",
+        address:"na---"
+    });
+</script>
+<hr>
+
+<h1>显示过滤/排序结果</h1>
+<ul class="vm4">
+    <li v-for="n in evenNumbers">
+        {{n}}
+    </li>
+</ul>
+<script>
+    var vm4 = new Vue({
+        el:".vm4",
+        data:{
+            numbers:[1,2,3,4,5]
+        },
+        computed:{
+            evenNumbers:function (){
+                return this.numbers.filter(function ( number ) {
+                    return number % 2 === 0;
+                });
+//                return this.numbers.reverse()
+            }
+        }
+    });
+</script>
+
+---
+<ul class="vm5">
+    <li v-for="n in even(numbers)">
+        {{n}}
+    </li>
+</ul>
+<script>
+    var vm5 = new Vue({
+        el:".vm5",
+        data:{
+            numbers:[1,2,3,4,5,6]
+        },
+        methods:{
+            even:function (numbers) {
+                return this.numbers.filter(function ( number ){
+                    return number % 2 === 0;
+                });
+            }
+        }
+    });
+</script>
+<hr>
+<h1>
+    一段取值范围的 v-for
+</h1>
+<ul class="vm6">
+    <li v-for="n in 10">{{ n }}</li>
+</ul>
+<script>
+//    var vm6 = new Vue({
+//        el:".vm6"
+//    });
+</script>
+
+<hr>
+<h1>demo---</h1>
+<div class="todo-list-example">
+    <input
+            v-model="newTodoText"
+            v-on:keyup.enter="addNewTodo"
+            placeholder="Add a todo"
+    >
+    <ul>
+        <li
+                is="todo-item"
+                v-for="(todo,index) in todos"
+                v-bind:key="todo.id"
+                v-bind:title="todo.title"
+                v-on:remove="todos.splice(index, 1)"
+        >
+
+        </li>
+    </ul>
+
+<script>
+    Vue.component("todo-item",{
+        props:["title"],
+        template:`
+        <li>
+        {{title}}
+        <button v-on:click="$emit('remove')">[X]</button>
+        </li>
+
+        `
+    });
+    var vm7 = new Vue({
+        el:".todo-list-example",
+        data:{
+            newTodoText:"",
+            todos:[
+                {id:1,title:"do1"},
+                {id:2,title:"do2"},
+                {id:3,title:"do3"}
+            ],
+            nextTodoId: 4
+        },
+        methods:{
+            addNewTodo:function () {
+                this.todos.push({
+                    id:this.nextTodoId++,
+                    title:this.newTodoText
+                });
+                this.newTodoText  = "";
+            }
+        }
+    });
+</script>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

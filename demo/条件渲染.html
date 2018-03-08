@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body style="padding-bottom: 200px;">
+<div class="vm1">
+
+
+    <div v-if="ok">
+        测试
+    </div>
+    <h1 v-else>No-false</h1>
+</div>
+<script>
+    var vm = new Vue({
+        el:".vm1",
+        data:{
+            ok:true
+        }
+    });
+</script>
+<hr>
+<div class="vm2">
+    <ul>
+        <todo-item v-for="key in lists"
+                   v-bind:item="key"
+                   v-bind:vkey="key.id"
+                   v-if="ok"
+        >
+
+        </todo-item>
+    </ul>
+</div>
+<script>
+    Vue.component("todo-item",{
+        props:['item'],
+        template:"<li>{{item.name}}</li>"
+    });
+    var vm2 = new Vue({
+        el:".vm2",
+        data:{
+            lists:[
+                {id:0,name:"00"},
+                {id:1,name:"11"},
+                {id:2,name:"22"}
+            ],
+            ok:true
+        }
+    });
+</script>
+<hr>
+<div class="vm3">
+    <div v-if="Math.random() > 0.5">
+        Now you see me
+    </div>
+    <div v-else>
+        Now you don't
+    </div>
+</div>
+<script>
+    var vm3 = new Vue({
+        el:".vm3"
+    });
+</script>
+<hr>
+<h1>用 key 管理可复用的元素</h1>
+
+<h5>no--key</h5>
+<div class="no-key">
+    <template v-if="loginType === 'username'">
+        <label>username</label>
+        <input placeholder="Enter your username" key="usename-input">
+    </template>
+    <template v-else>
+        <label>Email</label>
+        <input placeholder="Enter your email address" key="email-input">
+    </template>
+    <button @click="toggleLoginType">Toggle login type</button>
+</div>
+<script>
+    var vm4 = new Vue({
+        el:".no-key",
+        data:{
+            loginType:"username"
+        },
+        methods:{
+            toggleLoginType:function () {
+                return this.loginType = this.loginType === 'username' ? 'email' : "username";
+            }
+        }
+    });
+</script>
+
+<hr>
+<h1>v-show</h1>
+<div class="vm5" v-show="ok">
+    v-show-ceshi
+</div>
+<script>
+    var vm4 = new Vue({
+        el:".vm5",
+        data:{
+            ok:false
+        }
+    });
+</script>
+
+
+
+
+</body>
+</html>
