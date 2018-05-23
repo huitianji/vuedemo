@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+</head>
+<body>
+<div id="app">
+    <!--<router-link to=""></router-link>-->
+    <router-view></router-view>
+</div>
+<script>
+    var User = {
+        template:"<div>user----{{$route.params.username}}---{{	$route.query.username}}</div>"
+    };
+    var NotFound = {
+        template:"<div>notFound</div>"
+    }
+    var routes = [
+        {path:"/user?:username",component:User},
+        {path:"/user/:username",component:User},
+//        {path:"/user/123",component:User},
+//        {
+//            path: '*',
+//            component: NotFound,
+//            name: 'notfound',
+//            meta: {
+//                title: '404-页面丢了'
+//            }
+//        }
+    ]
+    var router = new VueRouter({
+        routes
+    });
+    router.beforeEach(function  (to, from, next) {
+        console.log(to,"ff",from)
+        document.title = to.meta.title || 'demo';
+        if (!to.query.url && from.query.url) {
+            to.query.url = from.query.url
+        }
+        next()
+    })
+    const userName = 123;
+    //router.push({name:"user",params:{userId:123}});
+    //router.push({path:"user/123"});
+    //router.push({path:`user/${userName}`})
+    //router.push({path:"user",query:{plan:'rs'}})
+    var app = new Vue({
+        el:"#app",
+        router
+    });
+</script>
+</body>
+</html>

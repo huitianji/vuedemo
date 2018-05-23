@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+</head>
+<body>
+<div id="app">
+    <router-view></router-view>
+</div>
+
+
+<script>
+
+    const  User = {
+        props:["id"],
+        template:"<div>user --- {{id}}</div>"
+    }
+    const NotFoundComponent = {
+        template:"<div>===not found   ---</div>"
+    }
+    const routes = [
+        {
+            path:"/user/:id",
+            component:User,
+            props:true
+        },
+        {
+            path: '*', component: NotFoundComponent
+        }
+    ];
+
+
+    const router = new VueRouter({
+        mode:"history",
+        routes
+    });
+
+
+
+    const app = new Vue({
+        el:"#app",
+        router
+    });
+</script>
+</body>
+</html>

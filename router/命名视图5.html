@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+</head>
+<body>
+<div id="app">
+    <!--<router-view>4444444</router-view>-->
+    <!--<router-view name="a"></router-view>-->
+    <!--<router-view name="b"></router-view>-->
+
+    <router-view class="view one"></router-view>
+    <router-view class="view two" name="a"></router-view>
+    <router-view class="view three" name="b"></router-view>
+
+</div>
+<script>
+    const User = {
+        template:"<div>user----{{$route.params}}</div>"
+    };
+    const Foo = {
+        template:"<div>---fooo---</div>"
+    }
+    const Bar = {
+        template:"<div>---Bar---</div>"
+    }
+    const Baz = {
+        template:"<div>---Baz---</div>"
+    }
+    const routes = [
+        {
+            path:"/user",
+            components:{
+                default:Foo,
+                a:Bar,
+                b:Baz
+            },
+            name:"user"
+        }
+    ];
+    const router = new VueRouter({
+        routes
+    });
+    const app = new Vue({
+        el:"#app",
+        router
+    });
+</script>
+</body>
+</html>

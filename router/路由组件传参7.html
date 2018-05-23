@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+</head>
+<body>
+<div id="app">
+    <router-view></router-view>
+</div>
+<script>
+
+    const User = {
+        props:["id"],
+        template:"<div>--user--{{id}}</div>"
+    };
+    const routes = [
+        {
+            path:"/user/:id",
+            component:User,
+            props:true
+
+        }
+    ];
+    const router = new VueRouter({
+        routes
+    });
+
+
+
+
+    const app = new Vue({
+        el:"#app",
+        router
+    });
+</script>
+</body>
+</html>
